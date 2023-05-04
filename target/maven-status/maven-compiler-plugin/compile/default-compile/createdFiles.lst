@@ -1,0 +1,5 @@
+nl/justid/ui/CliInput.class
+nl/justid/GameBoard.class
+nl/justid/ui/UserCliInput.class
+nl/justid/UserInputAdapter.class
+nl/justid/Main.class
