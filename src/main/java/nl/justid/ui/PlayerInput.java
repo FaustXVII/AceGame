@@ -1,5 +1,7 @@
 package nl.justid.ui;
 
+import nl.justid.player.Player;
+
 public interface PlayerInput {
-    PlayerChoice input();
+    PlayerChoice input(final Player player);
 }

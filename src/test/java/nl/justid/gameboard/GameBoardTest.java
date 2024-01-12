@@ -1,5 +1,6 @@
 package nl.justid.gameboard;
 
+import nl.justid.player.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,7 @@ class GameBoardTest {
         gameBoard
                 .getRow('a')
                 .getColumn(1)
-                .setPlayer("x");
+                .setPlayer(Player.PLAYER_1);
 
         // Then
         final String result = gameBoard
@@ -23,7 +24,7 @@ class GameBoardTest {
                 .getColumn(1)
                 .getPlayer();
 
-        assertEquals("x", result);
+        assertEquals("X", result);
     }
 
 }

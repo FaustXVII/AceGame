@@ -1,5 +1,7 @@
 package nl.justid.gameboard;
 
+import nl.justid.player.Player;
+
 public class BoardColumn {
     private String player = " ";
 
@@ -7,7 +9,7 @@ public class BoardColumn {
         return player;
     }
 
-    public void setPlayer(String player) {
-        this.player = player;
+    public void setPlayer(Player player) {
+        this.player = player.getSymbol();
     }
 }

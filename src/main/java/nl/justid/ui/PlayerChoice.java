@@ -1,4 +1,6 @@
 package nl.justid.ui;
 
-public record PlayerChoice (int playerId, char row, int column){
+import nl.justid.player.Player;
+
+public record PlayerChoice (Player player, char row, int column){
 }
