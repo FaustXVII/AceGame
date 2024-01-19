@@ -8,11 +8,13 @@ public class PlayerCommandlineInput implements PlayerInput{
     private final Scanner scanner =  new Scanner(System.in);
 
     @Override
-    public PlayerChoice input(final Player player) {
+    public PlayerChoice input(final Player player, final String message) {
         final char row;
         final int column;
 
-        System.out.println(player.getName() + ", make a move!");
+        String messageMove = message != null ? message: ", make a move!";
+
+        System.out.println(player.getName() + messageMove);
 
         System.out.print("select a row: ");
         row = scanner.next().charAt(0);// Max 1
