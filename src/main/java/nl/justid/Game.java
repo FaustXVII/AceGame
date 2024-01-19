@@ -24,14 +24,17 @@ public class Game {
             PlayerChoice p = input.input(currentPlayer, null);
 
             // Player may not select a filled field!
-            while (!moveCondition.correctCondition(p.row(), p.column() )) {
+            while (!moveCondition.correctCondition(p)) {
                 p = input.input(currentPlayer,", Field already filled, make an other move!");
             }
 
+            // try
             gameBoard
                     .getRow(p.row())
                     .getColumn(p.column())
-                    .setPlayer(p.player());
+                    .setGameSquare(p.player());
+            // catch
+            //
 
             // check if we have a winner..
             switchPlayer();

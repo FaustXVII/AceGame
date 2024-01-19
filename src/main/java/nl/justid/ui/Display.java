@@ -24,9 +24,9 @@ public class Display {
                  ---|---|---
                 c %s | %s | %s
                 """,
-                rowA.getColumn(1).getPlayer(), rowA.getColumn(2).getPlayer(), rowA.getColumn(3).getPlayer(),
-                rowB.getColumn(1).getPlayer(), rowB.getColumn(2).getPlayer(), rowB.getColumn(3).getPlayer(),
-                rowC.getColumn(1).getPlayer(), rowC.getColumn(2).getPlayer(), rowC.getColumn(3).getPlayer());
+                rowA.getColumn(1).getGameSquare(), rowA.getColumn(2).getGameSquare(), rowA.getColumn(3).getGameSquare(),
+                rowB.getColumn(1).getGameSquare(), rowB.getColumn(2).getGameSquare(), rowB.getColumn(3).getGameSquare(),
+                rowC.getColumn(1).getGameSquare(), rowC.getColumn(2).getGameSquare(), rowC.getColumn(3).getGameSquare());
 
         System.out.print(board);
     }

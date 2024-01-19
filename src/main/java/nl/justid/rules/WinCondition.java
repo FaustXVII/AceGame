@@ -67,33 +67,33 @@ public class WinCondition {
     }
 
     private String winningRow(final char row){
-        String _1 = gameBoard.getRow(row).getColumn(1).getPlayer();
-        String _2 = gameBoard.getRow(row).getColumn(2).getPlayer();
-        String _3 = gameBoard.getRow(row).getColumn(3).getPlayer();
+        String _1 = gameBoard.getRow(row).getColumn(1).getGameSquare();
+        String _2 = gameBoard.getRow(row).getColumn(2).getGameSquare();
+        String _3 = gameBoard.getRow(row).getColumn(3).getGameSquare();
 
         return _1 + _2 + _3;
     }
 
     private String winningColumn(final int column){
-        String _1 = gameBoard.getRow('a').getColumn(column).getPlayer();
-        String _2 = gameBoard.getRow('b').getColumn(column).getPlayer();
-        String _3 = gameBoard.getRow('c').getColumn(column).getPlayer();
+        String _1 = gameBoard.getRow('a').getColumn(column).getGameSquare();
+        String _2 = gameBoard.getRow('b').getColumn(column).getGameSquare();
+        String _3 = gameBoard.getRow('c').getColumn(column).getGameSquare();
 
         return  _1 + _2 + _3;
     }
 
     private String winningLeft(){
-        String _1 = gameBoard.getRow('a').getColumn(1).getPlayer();
-        String _2 = gameBoard.getRow('b').getColumn(2).getPlayer();
-        String _3 = gameBoard.getRow('c').getColumn(3).getPlayer();
+        String _1 = gameBoard.getRow('a').getColumn(1).getGameSquare();
+        String _2 = gameBoard.getRow('b').getColumn(2).getGameSquare();
+        String _3 = gameBoard.getRow('c').getColumn(3).getGameSquare();
 
         return  _1 + _2 + _3;
     }
 
     private String winningRechts(){
-        String _1 = gameBoard.getRow('a').getColumn(3).getPlayer();
-        String _2 = gameBoard.getRow('b').getColumn(2).getPlayer();
-        String _3 = gameBoard.getRow('c').getColumn(1).getPlayer();
+        String _1 = gameBoard.getRow('a').getColumn(3).getGameSquare();
+        String _2 = gameBoard.getRow('b').getColumn(2).getGameSquare();
+        String _3 = gameBoard.getRow('c').getColumn(1).getGameSquare();
 
         return  _1 + _2 + _3;
     }

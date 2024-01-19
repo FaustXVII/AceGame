@@ -16,13 +16,13 @@ class GameBoardTest {
         gameBoard
                 .getRow('a')
                 .getColumn(1)
-                .setPlayer(Player.PLAYER_1);
+                .setGameSquare(Player.PLAYER_1);
 
         // Then
         final String result = gameBoard
                 .getRow('a')
                 .getColumn(1)
-                .getPlayer();
+                .getGameSquare();
 
         assertEquals("X", result);
     }
