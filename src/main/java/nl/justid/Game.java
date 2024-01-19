@@ -2,8 +2,7 @@ package nl.justid;
 
 import nl.justid.gameboard.GameBoard;
 import nl.justid.player.Player;
-import nl.justid.rules.Status;
-import nl.justid.rules.WinCondition;
+import nl.justid.rules.*;
 import nl.justid.ui.Display;
 import nl.justid.ui.PlayerChoice;
 import nl.justid.ui.PlayerCommandlineInput;
@@ -16,12 +15,18 @@ public class Game {
         final Display display = new Display(gameBoard);
         PlayerCommandlineInput input = new PlayerCommandlineInput();
         final WinCondition winCondition = new WinCondition(gameBoard);
+        final MoveCondition moveCondition = new MoveCondition(gameBoard);
 
         while (winCondition.gameOver() == Status.CONTINUE){
             display.draw();
 
+
+            PlayerChoice p = input.input(currentPlayer, null);
+
             // Player may not select a filled field!
-            PlayerChoice p = input.input(currentPlayer);
+            while (!moveCondition.correctCondition(p.row(), p.column() )) {
+                p = input.input(currentPlayer,", Field already filled, make an other move!");
+            }
 
             gameBoard
                     .getRow(p.row())
@@ -32,7 +37,7 @@ public class Game {
             switchPlayer();
 
             // else
-                // end game.
+            // end game.
         }
 
         display.draw();
@@ -50,9 +55,9 @@ public class Game {
     private void switchPlayer() {
         switch (currentPlayer){// todo: move to method
             case PLAYER_1 : currentPlayer = Player.PLAYER_2;
-            break;
+                break;
             case PLAYER_2 : currentPlayer = Player.PLAYER_1;
-            break;
+                break;
         }
     }
 }
