@@ -1,5 +1,6 @@
 package nl.justid.gameboard;
 
+import nl.justid.gameboard.exceptions.IllegalPlayerMoveException;
 import nl.justid.player.Player;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameBoardTest {
 
     @Test
-    public void whenSet_thenContains(){
+    public void whenSet_thenContains() throws IllegalPlayerMoveException {
         // Given
         GameBoard gameBoard = new GameBoard();
 

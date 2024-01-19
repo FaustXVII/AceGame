@@ -1,6 +1,7 @@
 package nl.justid;
 
 import nl.justid.gameboard.GameBoard;
+import nl.justid.gameboard.exceptions.IllegalPlayerMoveException;
 import nl.justid.player.Player;
 import nl.justid.rules.*;
 import nl.justid.ui.Display;
@@ -21,18 +22,15 @@ public class Game {
             display.draw();
 
 
-            PlayerChoice p = input.input(currentPlayer, null);
+//            PlayerChoice p = input.input(currentPlayer, null);
 
             // Player may not select a filled field!
-            while (!moveCondition.correctCondition(p)) {
-                p = input.input(currentPlayer,", Field already filled, make an other move!");
-            }
+//            while (!moveCondition.correctCondition(p)) {
+//                p = input.input(currentPlayer,", Field already filled, make an other move!");
+//            }
 
             // try
-            gameBoard
-                    .getRow(p.row())
-                    .getColumn(p.column())
-                    .setGameSquare(p.player());
+            playerMove(gameBoard, input);
             // catch
             //
 
@@ -53,6 +51,19 @@ public class Game {
             System.out.println("We have a winner! \n" + winCondition.gameOver().getPlayer().getName());
         }
 
+    }
+
+    private void playerMove(GameBoard gameBoard, PlayerCommandlineInput input) {
+        try {
+            PlayerChoice p = input.input(currentPlayer, null);
+
+            gameBoard
+                    .getRow(p.row())
+                    .getColumn(p.column())
+                    .setGameSquare(p.player());
+        } catch (final IllegalPlayerMoveException e){
+            playerMove(gameBoard, input);
+        }
     }
 
     private void switchPlayer() {
