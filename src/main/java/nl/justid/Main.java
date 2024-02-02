@@ -1,7 +1,10 @@
 package nl.justid;
 
+import nl.justid.beans.BeanInitializer;
+
 public class Main {
     public static void main(String[] args) {
-       new Game().start();
+        BeanInitializer.init();
+        new Game().start();
     }
 }

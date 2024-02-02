@@ -1,10 +1,10 @@
 package nl.justid;
 
+import nl.justid.events.GameBoardUpdate.GameBoardUpdateHandler;
 import nl.justid.gameboard.GameBoard;
 import nl.justid.gameboard.exceptions.IllegalPlayerMoveException;
 import nl.justid.player.Player;
 import nl.justid.rules.*;
-import nl.justid.ui.Display;
 import nl.justid.ui.PlayerChoice;
 import nl.justid.ui.PlayerCommandlineInput;
 
@@ -12,36 +12,16 @@ public class Game {
     private Player currentPlayer = Player.PLAYER_1;
 
     public void start(){
-        final GameBoard gameBoard = new GameBoard();
-        final Display display = new Display(gameBoard);
         PlayerCommandlineInput input = new PlayerCommandlineInput();
-        final WinCondition winCondition = new WinCondition(gameBoard);
-        final MoveCondition moveCondition = new MoveCondition(gameBoard);
+        final WinCondition winCondition = new WinCondition();
+
+        GameBoardUpdateHandler.update();
 
         while (winCondition.gameOver() == Status.CONTINUE){
-            display.draw();
-
-
-//            PlayerChoice p = input.input(currentPlayer, null);
-
-            // Player may not select a filled field!
-//            while (!moveCondition.correctCondition(p)) {
-//                p = input.input(currentPlayer,", Field already filled, make an other move!");
-//            }
-
-            // try
-            playerMove(gameBoard, input);
-            // catch
-            //
-
-            // check if we have a winner..
+            playerMove(input);
             switchPlayer();
-
-            // else
-            // end game.
         }
 
-        display.draw();
 
         if (winCondition.gameOver() == Status.DRAW){
             System.out.println("No winner ='(");
@@ -53,16 +33,16 @@ public class Game {
 
     }
 
-    private void playerMove(GameBoard gameBoard, PlayerCommandlineInput input) {
+    private void playerMove(PlayerCommandlineInput input) {
         try {
             PlayerChoice p = input.input(currentPlayer, null);
 
-            gameBoard
+            GameBoard
                     .getRow(p.row())
                     .getColumn(p.column())
                     .setGameSquare(p.player());
         } catch (final IllegalPlayerMoveException e){
-            playerMove(gameBoard, input);
+            playerMove(input);
         }
     }
 

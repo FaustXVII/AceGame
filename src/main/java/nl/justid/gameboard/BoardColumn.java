@@ -1,10 +1,9 @@
 package nl.justid.gameboard;
 
+import nl.justid.events.GameBoardUpdate.GameBoardUpdateHandler;
 import nl.justid.gameboard.exceptions.IllegalPlayerMoveException;
 import nl.justid.player.Player;
 import nl.justid.utils.Strings;
-
-import java.util.Objects;
 
 public class BoardColumn {
     private String gameSquare = Strings.WHITE_SPACE;
@@ -19,6 +18,7 @@ public class BoardColumn {
         }
 
         this.gameSquare = gameSquare.getSymbol();
+        GameBoardUpdateHandler.update();
     }
 
     private boolean touched(){

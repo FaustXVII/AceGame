@@ -14,14 +14,17 @@ import static nl.justid.gameboard.ValueConverter.abcToIntIndex;
 //c   |   | o
 
 public class GameBoard {
-    private List<BoardRow> rows = new ArrayList<>();
-    {
+    private GameBoard(){}
+
+    private static final List<BoardRow> rows = new ArrayList<>();
+
+    static {
         rows.add(new BoardRow());
         rows.add(new BoardRow());
         rows.add(new BoardRow());
     }
 
-    public BoardRow getRow(char row){
+    public static BoardRow getRow(char row){
         return rows.get(abcToIntIndex(row));
     }
 }
