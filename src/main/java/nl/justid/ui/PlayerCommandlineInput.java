@@ -1,5 +1,6 @@
 package nl.justid.ui;
 
+import nl.justid.player.CurrentPlayerHolder;
 import nl.justid.player.Player;
 
 import java.util.Scanner;
@@ -7,10 +8,15 @@ import java.util.Scanner;
 public class PlayerCommandlineInput implements PlayerInput{
     private final Scanner scanner =  new Scanner(System.in);
 
+    public PlayerChoice input(){
+        return input(null);
+    }
+
     @Override
-    public PlayerChoice input(final Player player, final String message) {
+    public PlayerChoice input(final String message) {
         final char row;
         final int column;
+        final Player player = CurrentPlayerHolder.getCurrentPlayer();
 
         String messageMove = message != null ? message: ", make a move!";
 

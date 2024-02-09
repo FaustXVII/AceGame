@@ -4,8 +4,7 @@ import nl.justid.events.GameBoardUpdate.GameBoardUpdateHandler;
 import nl.justid.events.GameBoardUpdate.GameBoardUpdateListener;
 import nl.justid.events.WinConditionUpdate.WinConditionEventHandler;
 import nl.justid.gameboard.GameBoard;
-import nl.justid.player.Player;
-import nl.justid.rules.Status;
+import nl.justid.player.CurrentPlayerHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,44 +15,30 @@ public class WinCondition implements GameBoardUpdateListener {
         GameBoardUpdateHandler.subscribe(this);
     }
 
-//    private final GameBoard gameBoard;
-
-//    public WinCondition(final GameBoard gameBoard){
-//        this.gameBoard = gameBoard;
-//    }
     @Override
     public void onGameBoardUpdateEvent() {
         gameOver();
     }
 
-    public Status gameOver(){
+    public void gameOver(){
         final List<String> winOption = initWinOptions();
+        CurrentPlayerHolder.switchPlayer();
+        getWinner(winOption);
 
-        return getWinner(winOption);
     }
 
-    // Continue
-    // Win (Player)
-    // Draw
-
-    private static Status getWinner(List<String> winOption) {
+    private static void getWinner(List<String> winOption) {
         boolean boardIsFull = true;
 
         for (String option : winOption) {
             if(option.equalsIgnoreCase("XXX")){
-//                final Status status = Status.WINNER;
                 WinConditionEventHandler.updateWinner();
-//                status.setPlayer(Player.PLAYER_1);
-//                return status;
-                return null;
+                return;
             }
 
             if(option.equalsIgnoreCase("OOO")){
-//                final Status status = Status.WINNER;
                 WinConditionEventHandler.updateWinner();
-//                status.setPlayer(Player.PLAYER_2);
-//                return status;
-                return null;
+                return;
             }
 
             if(option.replace(" ", "").length() < 3){
@@ -63,13 +48,10 @@ public class WinCondition implements GameBoardUpdateListener {
 
         if(boardIsFull){
             WinConditionEventHandler.updateDraw();
-            return null;
-//            return Status.DRAW;
+            return;
         }
 
-//        return Status.CONTINUE;
         WinConditionEventHandler.updateContinue();
-        return null;
     }
 
     private List<String> initWinOptions() {
