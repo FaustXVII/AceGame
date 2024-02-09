@@ -13,6 +13,6 @@ public class GameBoardUpdateHandler {
     }
 
     public static void update(){
-        LISTENERS.forEach(sub -> sub.gameBoardUpdate());
+        LISTENERS.forEach(sub -> sub.onGameBoardUpdateEvent());
     }
 }

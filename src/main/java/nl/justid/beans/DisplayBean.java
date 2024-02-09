@@ -11,7 +11,7 @@ class DisplayBean implements GameBoardUpdateListener {
     }
 
     @Override
-    public void gameBoardUpdate() {
+    public void onGameBoardUpdateEvent() {
         draw();
     }
 
@@ -36,6 +36,17 @@ class DisplayBean implements GameBoardUpdateListener {
         System.out.print(board);
     }
 }
+
+
+
+// GameColumn -> GameBoardUpdate Handler <-> GameBoardUpdateListener <- DisplayBean
+// GameColumn -> Event Magic <- DisplayBean
+// GameColumn -> DisplayBean.draw()
+
+// low coupling - high cohesion
+
+
+
 
 
 //          main
