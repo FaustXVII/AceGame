@@ -12,5 +12,6 @@ public class BeanInitializer {
 
         hasRun = true;
         new DisplayBean();
+        new WinCondition();
     }
 }

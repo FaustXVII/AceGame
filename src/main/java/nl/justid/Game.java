@@ -1,6 +1,7 @@
 package nl.justid;
 
 import nl.justid.events.GameBoardUpdate.GameBoardUpdateHandler;
+import nl.justid.events.WinConditionUpdate.WinConditionEventHandler;
 import nl.justid.gameboard.GameBoard;
 import nl.justid.gameboard.exceptions.IllegalPlayerMoveException;
 import nl.justid.player.Player;
@@ -9,27 +10,33 @@ import nl.justid.ui.PlayerChoice;
 import nl.justid.ui.PlayerCommandlineInput;
 
 public class Game {
-    private Player currentPlayer = Player.PLAYER_1;
+    private static Player currentPlayer = Player.PLAYER_1;
 
     public void start(){
         PlayerCommandlineInput input = new PlayerCommandlineInput();
-        final WinCondition winCondition = new WinCondition();
+//        final WinCondition winCondition = new WinCondition();
+        WinConditionEventHandler.subscribeDraw(() ->  System.out.println("No winner"));
+        WinConditionEventHandler.subscribeWinner(() ->   System.out.println("We have a winner! \n"));
+        WinConditionEventHandler.subscribeContinue(() -> {
+            playerMove(input);
+            switchPlayer();
+        });
 
         GameBoardUpdateHandler.update();
 
-        while (winCondition.gameOver() == Status.CONTINUE){
-            playerMove(input);
-            switchPlayer();
-        }
-
-
-        if (winCondition.gameOver() == Status.DRAW){
-            System.out.println("No winner ='(");
-        }
-
-        if (winCondition.gameOver() == Status.WINNER){
-            System.out.println("We have a winner! \n" + winCondition.gameOver().getPlayer().getName());
-        }
+//        while (winCondition.gameOver() == Status.CONTINUE){
+//            playerMove(input);
+//            switchPlayer();
+//        }
+//
+//
+//        if (winCondition.gameOver() == Status.DRAW){
+//            System.out.println("No winner ='(");
+//        }
+//
+//        if (winCondition.gameOver() == Status.WINNER){
+//            System.out.println("We have a winner! \n" + winCondition.gameOver().getPlayer().getName());
+//        }
 
     }
 

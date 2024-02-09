@@ -1,17 +1,30 @@
-package nl.justid.rules;
+package nl.justid.beans;
 
+import nl.justid.events.GameBoardUpdate.GameBoardUpdateHandler;
+import nl.justid.events.GameBoardUpdate.GameBoardUpdateListener;
+import nl.justid.events.WinConditionUpdate.WinConditionEventHandler;
 import nl.justid.gameboard.GameBoard;
 import nl.justid.player.Player;
+import nl.justid.rules.Status;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinCondition {
+public class WinCondition implements GameBoardUpdateListener {
+
+    WinCondition(){
+        GameBoardUpdateHandler.subscribe(this);
+    }
+
 //    private final GameBoard gameBoard;
 
 //    public WinCondition(final GameBoard gameBoard){
 //        this.gameBoard = gameBoard;
 //    }
+    @Override
+    public void onGameBoardUpdateEvent() {
+        gameOver();
+    }
 
     public Status gameOver(){
         final List<String> winOption = initWinOptions();
@@ -28,15 +41,19 @@ public class WinCondition {
 
         for (String option : winOption) {
             if(option.equalsIgnoreCase("XXX")){
-                final Status status = Status.WINNER;
-                status.setPlayer(Player.PLAYER_1);
-                return status;
+//                final Status status = Status.WINNER;
+                WinConditionEventHandler.updateWinner();
+//                status.setPlayer(Player.PLAYER_1);
+//                return status;
+                return null;
             }
 
             if(option.equalsIgnoreCase("OOO")){
-                final Status status = Status.WINNER;
-                status.setPlayer(Player.PLAYER_2);
-                return status;
+//                final Status status = Status.WINNER;
+                WinConditionEventHandler.updateWinner();
+//                status.setPlayer(Player.PLAYER_2);
+//                return status;
+                return null;
             }
 
             if(option.replace(" ", "").length() < 3){
@@ -45,10 +62,14 @@ public class WinCondition {
         }
 
         if(boardIsFull){
-            return Status.DRAW;
+            WinConditionEventHandler.updateDraw();
+            return null;
+//            return Status.DRAW;
         }
 
-        return Status.CONTINUE;
+//        return Status.CONTINUE;
+        WinConditionEventHandler.updateContinue();
+        return null;
     }
 
     private List<String> initWinOptions() {
