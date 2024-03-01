@@ -33,4 +33,10 @@ public class WinConditionEventHandler {
     public static void updateContinue(){
         CONTINUE_LISTENERS.forEach(sub -> sub.onContinueEvent());
     }
+
+    public static void unSubscribeAll(){
+        WINNER_LISTENERS.clear();
+        DRAW_LISTENERS.clear();
+        CONTINUE_LISTENERS.clear();
+    }
 }
